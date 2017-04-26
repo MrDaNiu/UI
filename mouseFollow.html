@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.n_header{
+			    width: 1200px;
+			    height: 40px;
+			    line-height: 40px; 
+			    border-radius: 50px 50px 50px 50px;
+			    background-color: #ffffff;
+			    margin: 30px auto 33px auto;
+			    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06);
+			    letter-spacing: -1px;
+			    position: relative;
+			}
+			.n_header .item_type{
+			    display: inline-block;
+			    *display:inline;
+			    *zoom:1;
+			    width: 171px;
+			    text-align: center;
+			    font-size: 16px;
+			    color: #666666;
+			    cursor: pointer;
+			    letter-spacing: 0;
+				position: relative;
+				z-index: 2;
+			}
+			.n_header .item_type em{
+			    font-size: 12px;
+			}
+			.n_header .l3{
+			    margin-left: -4px;
+			}
+			.n_header .hover{
+			    border-radius: 50px 50px 50px 50px;
+			    background-image: linear-gradient(-90deg, #FF6900 0%, #FFA200 100%); 
+			    box-shadow: 0 3px 6px 0 rgba(251,86,21,0.33);
+				z-index:1;
+				top:0;
+			}
+			.n_header .select{
+				color:#FFFFFF; 
+			    -webkit-transition: all 0.4s;
+			    -moz-transition: all 0.4s;
+			    -o-transition: all 0.4s;
+			    transition: all 0.4s;
+			}
+			.n_header:hover .select{
+				color: #666666;
+			    -webkit-transition: all 0.4s;
+			    -moz-transition: all 0.4s;
+			    -o-transition: all 0.4s;
+			    transition: all 0.4s;
+			}
+			.n_header .item_type:hover{
+				color: #ffffff;
+			    -webkit-transition: all 0.4s;
+			    -moz-transition: all 0.4s;
+			    -o-transition: all 0.4s;
+			    transition: all 0.4s;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="n_header">
+	        <div class="item_type select" id="0">全部&nbsp;<em>(46)</em></div>
+	        <div class="item_type l3" id="1">未发布&nbsp;<em>(0)</em></div>
+	        <div class="item_type l3" id="2">审核中&nbsp;<em>(1)</em></div>
+	        <div class="item_type l3" id="3">报名中&nbsp;<em>(0)</em></div>
+	        <div class="item_type l3" id="4">竞标中&nbsp;<em>(1)</em></div>
+	        <div class="item_type l3" id="5">评标中&nbsp;<em>(1)</em></div>
+	        <div class="item_type l3" id="6">已结束&nbsp;<em>(43)</em></div>
+    		</div>
+	    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
+	    <script type="text/javascript">
+			$('body').on('click','.item_type',function(){
+				$(this).parent().find('.item_type').removeClass('select');
+				$(this).addClass('select');
+				tabAnimate($('.n_header'),'select','hover');
+			})
+			var  tabAnimate = function($obj,selectClass,hoverClass){
+				//创建容器
+				var $bg = $('<div></div>');
+				var $selectElement = $('.'+selectClass);
+				$bg.css({
+					position:'absolute',
+					width:$selectElement.width(),
+					height:$selectElement.height(),
+					left:$selectElement.offset().left-$obj.offset().left,
+				}).addClass('mouse_follow').addClass(hoverClass);
+				//避免重复添加hover样式
+				if(!$('.mouse_follow').length){
+					$obj.append($bg);
+				}
+				$obj.children('.item_type').hover(function(){
+					$bg.stop().animate({'left':$(this).offset().left-$obj.offset().left});
+				})
+				$obj.mouseleave(function(){
+					$bg.stop().animate({'left':$('.'+selectClass).offset().left-$obj.offset().left});
+				})
+			}
+			tabAnimate($('.n_header'),'select','hover');
+	    </script>
+	</body>
+</html>
