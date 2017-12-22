@@ -130,10 +130,10 @@ $.fn.extend({
         var bind = function ($self) {
             $self.parent().unbind().hover(function () {
                 event.stopPropagation();
-                $self.siblings('.ui-modal-img').show();
+                $self.siblings('.ui-modal-img').slideDown();
             }, function () {
                 event.stopPropagation();
-                $self.siblings('.ui-modal-img').hide();
+                $self.siblings('.ui-modal-img').slideUp();
             });
 
 
